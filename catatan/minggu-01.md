@@ -7,6 +7,7 @@ Pertama tama saya menginstal JDK21 dan Maven, kemudian Saya mengerjakan 3 paradi
 
 ## Keputusan desain
 Menggunakan 3 paradigma pemrograman menunjukan bahwa kebutuhan yang sama dapat di implementasikan dengan pendekatan yang berbeda. pada prosedural saya menggunakan fungsi static, pada OOP saya menggunakan stribut private dan konstruktor untuk mengelola data, sedangkan pada fungsional saya menggunakan lambda melalui function<String, String>. saya memilih format sapaan yang sama agar hasil ketiga pendekatan mudah dibandingkan dan dapat di verivikasi melalui pengujian otomatis
+Rujuk `docs/asumsi.md` saya tambahkan A01 dan A02
 
 ## Kendala
 Awalnya saya masih kesusahan untuk mengerti alur pengerjaan tugasnya dan bingung, dan saya juga sempat melakukan kesalahan dalam pengetikan kata sapaan, pada HelloProsedural saya menulis kata sapaannya secara berbeda dengan yang lain dan menimbulkan hasil pengujian di anggap berbeda, tetapi sudah saya betulkan.
