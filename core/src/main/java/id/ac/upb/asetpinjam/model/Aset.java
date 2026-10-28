@@ -1,7 +1,6 @@
 package id.ac.upb.asetpinjam.model;
 
 import id.ac.upb.asetpinjam.kontrak.DapatDipinjam;
-import id.ac.upb.asetpinjam.config.Varian;
 
 /**
  * Aset yang dapat dipinjam.
@@ -12,7 +11,7 @@ import id.ac.upb.asetpinjam.config.Varian;
  * Minggu 5: isi bisaDipinjam() dan ubah menjadi class abstrak
  * (TestSupport.aset(...) di folder test menyesuaikan sendiri, lihat docs/minggu-05.md).
  */
-public class Aset implements DapatDipinjam {
+public abstract class Aset implements DapatDipinjam {
 
     private String kode;
     private String nama;
@@ -83,10 +82,5 @@ public class Aset implements DapatDipinjam {
     }
 
 
-    public long hitungDenda(int hariTerlambat) {
-        if (hariTerlambat <0) {
-            throw new IllegalArgumentException("Hari terlambat tidak boleh negatif");
-        }
-        return (long) hariTerlambat * Varian.aktif().dendaPerHari;
-    }
+    public abstract long hitungDenda(int hariTerlambat);
 }
