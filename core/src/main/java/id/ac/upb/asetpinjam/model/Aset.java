@@ -1,6 +1,7 @@
 package id.ac.upb.asetpinjam.model;
 
 import id.ac.upb.asetpinjam.kontrak.DapatDipinjam;
+import id.ac.upb.asetpinjam.config.Varian;
 
 /**
  * Aset yang dapat dipinjam.
@@ -13,7 +14,6 @@ import id.ac.upb.asetpinjam.kontrak.DapatDipinjam;
  */
 public class Aset implements DapatDipinjam {
 
-    // TODO minggu 2: field private: kode, nama, status (default TERSEDIA), kondisi (default BAIK).
     private String kode;
     private String nama;
     private StatusAset status = StatusAset.TERSEDIA;
@@ -48,7 +48,6 @@ public class Aset implements DapatDipinjam {
         return kondisi;
     }
 
-    /** TODO minggu 2: nama baru tidak boleh kosong. */
     public void setNama(String nama) {
         if (nama == null || nama.trim().isEmpty()) {
             throw new IllegalArgumentException("Nama aset tidak boleh null atau kosong");
@@ -56,7 +55,6 @@ public class Aset implements DapatDipinjam {
         this.nama = nama.trim();
     }
 
-    /** TODO minggu 2: status tidak boleh null. */
     public void setStatus(StatusAset status) {
         if (status == null){
             throw new IllegalArgumentException("Status aset tidak boleh null");
@@ -84,8 +82,11 @@ public class Aset implements DapatDipinjam {
         throw new UnsupportedOperationException("TODO minggu 3");
     }
 
-    /** TODO minggu 4: denda keterlambatan. Dioverride tiap subclass (aturan di docs/aturan-bisnis.md). */
+
     public long hitungDenda(int hariTerlambat) {
-        throw new UnsupportedOperationException("TODO minggu 4");
+        if (hariTerlambat <0) {
+            throw new IllegalArgumentException("Hari terlambat tidak boleh negatif");
+        }
+        return (long) hariTerlambat * Varian.aktif().dendaPerHari;
     }
 }

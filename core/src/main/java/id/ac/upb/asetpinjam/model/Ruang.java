@@ -1,9 +1,8 @@
 package id.ac.upb.asetpinjam.model;
+import id.ac.upb.asetpinjam.config.Varian;
 
-/** Minggu 3: aset berupa ruang. Kapasitas harus lebih dari 0 (IllegalArgumentException). */
 public class Ruang extends Aset {
 
-    // TODO minggu 3: field kapasitas.
     private int kapasitas;
 
     public Ruang(String kode, String nama, int kapasitas) {
@@ -12,7 +11,7 @@ public class Ruang extends Aset {
         if (kapasitas <= 0) {
             throw new IllegalArgumentException("Kapasitas ruang harus lebih dari 0");
         }
-       
+
         this.kapasitas = kapasitas;
     }
 
@@ -20,10 +19,16 @@ public class Ruang extends Aset {
         return kapasitas;
     }
 
-    @Override 
+    @Override
     public JenisAset getJenis() {
         return JenisAset.RUANG;
     }
 
-    // TODO minggu 3: override getJenis(). Minggu 4: override hitungDenda(int).
+    @Override
+    public long hitungDenda(int hariTerlambat) {
+        if (hariTerlambat < 0) {
+            throw new IllegalArgumentException("Hari terlambat tidak boleh negatif");
+        }
+        return (long) hariTerlambat * Varian.aktif().dendaPerHari;
+    }
 }
