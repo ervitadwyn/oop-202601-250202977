@@ -47,6 +47,13 @@ Format tiap entri:
 - Dampak ke kode : perubahan pada denda progresif
 - Tes yang membuktikan: `core/src/test/java/id/ac/upb/asetpinjam/Minggu05AbstraksiTest.java`
 
+## A-06: Batas waktu bentrok
+- Pertanyaan: Apakah peminjaman pukul 09.00–11.00 dan 11.00–13.00 pada aset yang sama dianggap bentrok?
+- Keputusan: tidak bentrok apabila waktu selesai peminjaman pertama sama dengan waktu mulai peminjaman berikutnya
+- Alasan: aset dapat digunakan oleh peminjam berikutnya setelah waktu peminjaman sebelumnya berakhir. Kedua peminjaman tidak memiliki waktu yang tumpang tindih.
+- Dampak ke kode : pemeriksaan bentrok menggunakan kondisi waktu mulai peminjaman baru lebih awal dari waktu selesai peminjaman lama, dan waktu selesai peminjaman baru lebih akhir dari waktu mulai peminjaman lama. maka dari itu, batas akhir interval tidak termasuk dalam rentang peminjaman
+- Tes yang membuktikan: `core/src/test/java/id/ac/upb/asetpinjam/mahasiswa/BatasBentrokTest.java`
+
 ## Aturan ambigu dari docs/aturan-bisnis.md
 
 Salin setiap pertanyaan ambigu (nomor 1 sampai 7) ke sini dan jawab. Contoh:

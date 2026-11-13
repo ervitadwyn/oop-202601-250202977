@@ -4,6 +4,9 @@ import id.ac.upb.asetpinjam.model.Peminjaman;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Objects;
 
 /**
  * Jadwal peminjaman di memori.
@@ -38,22 +41,42 @@ public class JadwalPeminjaman {
      * Definisi "bentrok" di batas waktu (selesai sama dengan mulai) adalah KEPUTUSAN ANDA (docs/asumsi.md).
      */
     public boolean bentrok(Peminjaman baru) {
-        throw new UnsupportedOperationException("TODO minggu 7: bentrok");
+        for (Peminjaman lama : daftar) {
+
+            boolean samaAset = lama.getAset().getKode().equals(baru.getAset().getKode());
+
+            boolean waktuBentrok = (baru.getMulai().isBefore(lama.getSelesai())
+                    && baru.getSelesai().isAfter(lama.getMulai()));
+            if (samaAset && waktuBentrok) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /** TODO minggu 7: semua peminjaman, diurutkan menurut waktu mulai (gunakan Comparator). */
     public List<Peminjaman> semuaUrutMulai() {
-        throw new UnsupportedOperationException("TODO minggu 7: semuaUrutMulai");
+        List<Peminjaman> hasil = new ArrayList<>(daftar);
+
+        hasil.sort(Comparator.comparing(Peminjaman::getMulai));
+
+        return hasil;
     }
 
     /** TODO minggu 7: peminjaman dikelompokkan menurut kode aset. */
     public Map<String, List<Peminjaman>> perAset() {
-        throw new UnsupportedOperationException("TODO minggu 7: perAset");
+        Map<String, List<Peminjaman>> hasil = new LinkedHashMap<>();
+        for (Peminjaman p : daftar) {
+            String kodeAset = p.getAset().getKode();
+            hasil.computeIfAbsent(kodeAset, k -> new ArrayList<>()).add(p);
+        }
+        return hasil;
     }
 
     /** TODO minggu 7: hapus peminjaman berdasarkan id. True jika ada yang terhapus. */
     public boolean hapus(String id) {
-        throw new UnsupportedOperationException("TODO minggu 7: hapus");
+        return daftar.removeIf(p -> p.getId().equals(id));
     }
 
     /**
